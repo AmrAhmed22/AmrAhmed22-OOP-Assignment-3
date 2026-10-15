@@ -24,5 +24,14 @@ With interface, each class will need to repeat the implementation again, which i
 ## Enrollment
 
 - What was the problem?
+Main do too much work. Its create four different objects and know the exact order to call their methods.
+
+
 - What did you change?
+Make one class gathered all the flow in one place and inforce the order, the main should not know this internal info 
+
+ 
 - Why did you choose that approach?
+it hides the complexity , the order of the flow .
+the Main func no longer needs to know about the internal services,or how they work, or the order of them.
+
