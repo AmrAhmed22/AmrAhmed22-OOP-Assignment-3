@@ -8,6 +8,12 @@ namespace Generics
 {
     public class Course : IHasID
     {
+        public Course(int iD, string title, double price)
+        {
+            ID = iD;
+            Title = title;
+            Price = price;
+        }
 
         public int ID { get; private set; }
         public string Title { get; private set; }
