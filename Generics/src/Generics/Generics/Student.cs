@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    public class Student
+    public class Student : IHasID
     {
         public int ID { get; private set; }
         public string Name { get; private set; }

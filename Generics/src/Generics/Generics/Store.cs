@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    public class Store<T>
+    public class Store<T> where T : IHasID
     {
         private readonly List<T> objects = new();
 
@@ -27,11 +27,11 @@ namespace Generics
 
             foreach (var o in objects)
             {
-                if (o.ID == id)
+                if (o.ID == id) // compiled fine now, no error after implement the interface
                     return o;
 
             }
-            return null;
+            return default;
         }
 
 
