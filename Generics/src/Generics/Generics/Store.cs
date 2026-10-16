@@ -8,14 +8,17 @@ namespace Generics
 {
     public class Store<T> where T : IHasID
     {
-        private readonly List<T> objects = new();
+        private readonly Dictionary<int,T> objects = new();
 
         public void Add(T obj)
         {
             if (obj == null)
                 throw new NullReferenceException("Student is NULL.");
 
-            objects.Add(obj);
+          
+
+            if (!objects.TryAdd(obj.ID, obj))
+                throw new ArgumentException($"the item with Id {obj.ID} already exists.");
 
         }
 
@@ -25,19 +28,14 @@ namespace Generics
                 throw new ArgumentException("ID must be postive.");
 
 
-            foreach (var o in objects)
-            {
-                if (o.ID == id) // compiled fine now, no error after implement the interface
-                    return o;
+            return objects.TryGetValue(id, out var val) ? val : default;
 
-            }
-            return default;
         }
 
 
-        public List<T> GetAll()
+        public IEnumerable<T> GetAll() // readonly outside,no add or remove
         {
-            return objects;
+            return objects.Values;
         }
 
         public bool Remove(int id)
@@ -47,18 +45,7 @@ namespace Generics
                 throw new ArgumentException("ID must be postive.");
 
 
-            foreach (var o in objects)
-            {
-                if (o.ID == id)
-                {
-                    objects.Remove(o);
-                    return true;
-                }
-            }
-
-
-            return false;
-
+            return objects.Remove(id);
 
         }
 
